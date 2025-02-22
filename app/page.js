@@ -16,23 +16,30 @@ export default function LandingPage() {
         <div className="relative w-full h-[60vh] Background-image justify-center flex flex-col overflow-hidden">
           
           <div className="Background-image-glass absolute inset-0 z-0 items-center flex justify-between" >
-            <div className="relative z-10 bg-gradient-to-r from-white to-transparent dark:from-black dark:to-transparent p-6 rounded-lg max-w-2xl">
+            <div className="relative  z-10 bg-gradient-to-r from-white to-transparent dark:from-black dark:to-transparent p-6 rounded-lg max-w-2xl">
               <motion.h1
                 className="text-4xl md:text-6xl font-bold mb-4"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                Welcome to Phoenix Firelight
+                transition={{ duration: 0.5 }}>
+                  Welcome to Phoenix Firelight
               </motion.h1>
               <p className="text-lg md:text-xl mb-6">
                 Ignite your passion for knowledge, storytelling, and creative exploration.
               </p>
-              <Link href="/signup" className="block w-fit">
-                <Button className="px-6 py-3 text-lg font-bold flex items-center">
-                  Get Started <ArrowRight className="ml-2" />
-                </Button>
-              </Link>
+              <div className="flex justify-start gap-3">
+                <Link href="/signup" className="block w-fit">
+                  <Button className="px-6 py-3 text-lg font-bold flex items-center">
+                    Get Started <ArrowRight className="ml-2" />
+                  </Button>
+                </Link>
+
+                <Link href="/blogs">
+                  <Button variant="outline" className="">
+                    Explore blogs <ArrowRight className="ml-2" />
+                  </Button>
+                </Link>
+              </div>
             </div>
               {/* <Image src={"/logo1-bg-less.png"} alt="logo1-image" width={"300"} height={"300"} className="p-6 bg-[#020817] rounded-full"/> */}
           </div>

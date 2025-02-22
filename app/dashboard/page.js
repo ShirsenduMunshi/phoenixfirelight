@@ -1,4 +1,5 @@
 "use client";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import DashboardSidebar from "@/components/DashboardSidebar";
 import Footer from "@/components/Footer";
 import { useState, useEffect } from "react";
@@ -16,7 +17,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 
-export default function DashboardPage() {
+function DashboardPageContent() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [dashboardData, setDashboardData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -187,5 +188,12 @@ export default function DashboardPage() {
                 <Footer />
             </div>
         </>
+    );
+}
+export default function DashboardPage() {
+    return (
+        <ProtectedRoute>
+            <DashboardPageContent />
+        </ProtectedRoute>
     );
 }

@@ -92,6 +92,6 @@ export default function ContactForm() {
         </CardContent>
       </Card>
     </main>
-    <Footer />
+    {/* <Footer /> */}
     </>);
 }

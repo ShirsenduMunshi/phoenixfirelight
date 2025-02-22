@@ -5,10 +5,11 @@ import { Button } from "@/components/ui/button";
 import { FaRocket, FaCode, FaUsers } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 export default function AboutPage() {
-  return (
-    <div className="max-w-4xl mx-auto py-12 px-4 space-y-8">
+  return (<>
+    <main className="max-w-4xl mx-auto py-12 px-4 space-y-8">
       <motion.h1
         className="text-3xl font-bold text-center"
         initial={{ opacity: 0, y: -20 }}
@@ -18,7 +19,7 @@ export default function AboutPage() {
         About PhonexFirelight
       </motion.h1>
 
-      <motion.p
+      <motion.div
         className="text-center text-lg max-w-2xl mx-auto"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -34,7 +35,7 @@ export default function AboutPage() {
         and share content seamlessly. Built with Next.js, Supabase, and
         Cloudinary, it ensures a smooth and engaging experience for content
         creators.
-      </motion.p>
+      </motion.div>
 
       <div className="mt-8">
           <Card>
@@ -89,6 +90,7 @@ export default function AboutPage() {
             <Button variant="outline" className="px-6 py-3 text-lg">Contact us</Button>
         </Link>
       </div>
-    </div>
-  );
+    </main>
+    {/* <Footer /> */}
+    </>);
 }

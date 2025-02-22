@@ -199,14 +199,15 @@ export default function AdminPostsPage() {
 
     return (
         <>
-            <div onClick={() => setIsSidebarOpen((prev) => !prev)}>
+            <Button onClick={() => setIsSidebarOpen((prev) => !prev)} className={`fixed float-right z-50 right-0`}>⇄</Button>
+            <div className={`transition-all relative top-0 right-0 h-full z-50 ${isSidebarOpen ? "left-0" : "left-[-100%]" }`}>
                 <DashboardSidebar />
             </div>
 
             {/* BLOG LIST */}
             <div
                 className={`container mx-auto p-4 transition-all ${
-                    isSidebarOpen ? "w-[77%] ml-[23%]" : "w-[80%] ml-[20%]"
+                    isSidebarOpen ? "w-[75%] ml-[25%]" : "w-[100%] ml-[0%]"
                 }`}
             >
                 <h1 className="text-2xl font-bold mb-4">Your Blog Posts</h1>

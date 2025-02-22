@@ -81,7 +81,8 @@ function BlogForm() {
     };
 
     return (<>
-        <div onClick={() => setIsSidebarOpen((prev) => !prev)}>
+    <Button onClick={() => setIsSidebarOpen((prev) => !prev)} className={`fixed float-right z-50 right-0`}>⇄</Button>
+        <div className={`transition-all relative top-0 right-0 h-full z-50 ${isSidebarOpen ? "left-0" : "left-[-100%]" }`}>
             <DashboardSidebar />
         </div>
         <Toaster />

@@ -1,7 +1,6 @@
 "use client";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import DashboardSidebar from "@/components/DashboardSidebar";
-import Footer from "@/components/Footer";
 import { useState, useEffect } from "react";
 import { getUserProfile } from "@/lib/auth";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -75,12 +74,13 @@ function DashboardPageContent() {
 
     return (
         <>
-            <div onClick={() => setIsSidebarOpen((prev) => !prev)}>
+        <Button onClick={() => setIsSidebarOpen((prev) => !prev)} className={`font-bold text-xl relative right-[-90%]`}>⇄</Button>
+            <div className={`transition-all fixed top-0 left-0 h-full z-50 ${isSidebarOpen ? "left-0" : "left-[-100%]" }`}>
                 <DashboardSidebar />
             </div>
             <main
-                className={`min-h-screen pr-8 flex flex-col gap-6 transition-all ${
-                    isSidebarOpen ? "w-[77%] ml-[23%]" : "w-[80%] ml-[20%]"
+                className={`min-h-screen px-8 flex flex-col gap-6 transition-all ${
+                    isSidebarOpen ? "w-[75%] ml-[25%]" : "w-[100%] ml-[0%]"
                 } `}
             >
                 {/* Top Section - Stats */}
@@ -184,9 +184,6 @@ function DashboardPageContent() {
                     <Skeleton className="w-full sm:w-[300px] h-10 rounded-md" />
                 </div>
             </main>
-            <div className={`${isSidebarOpen ? "w-[77%] ml-[23%]" : "w-[80%] ml-[20%]"}`}>
-                <Footer />
-            </div>
         </>
     );
 }

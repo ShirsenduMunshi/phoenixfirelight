@@ -18,7 +18,7 @@ export default function LoginPage() {
         e.preventDefault();
         try {
             await signIn(email, password);
-            router.push("/dashboard");
+            router.push("/blogs");
             setLoading(false);
         } catch (err) {
             setError(err.message);

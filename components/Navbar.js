@@ -298,7 +298,7 @@ export default function Navbar() {
               isLoggedIn ? (
                 <>
                   <Link href="/dashboard">
-                    <Button>Dashboard</Button>
+                    <Button className="font-bold">Dashboard</Button>
                   </Link>
                   <Button variant="destructive" onClick={handleLogout}>
                     Logout
@@ -346,7 +346,7 @@ export default function Navbar() {
             isLoggedIn ? (
               <>
                 <Link href="/dashboard" onClick={() => setMenuOpen(false)}>
-                  <Button className="w-full">Dashboard</Button>
+                  <Button className="w-full font-bold">Dashboard</Button>
                 </Link>
                 <Button variant="destructive" onClick={handleLogout} className="w-full">
                   Logout

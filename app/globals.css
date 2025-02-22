@@ -143,3 +143,14 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.Background-image{
+  background: url('/banner.jpg'),rgb(0, 0, 0);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+.Background-image-glass{
+  background: rgba(0, 0, 0, 0.521);
+}

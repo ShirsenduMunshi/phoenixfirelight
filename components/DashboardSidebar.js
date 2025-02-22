@@ -68,7 +68,7 @@ const DashboardSidebar = () => {
 //              </div>
   return (
      <>
-        <div className={`z-50 w-72 border-r-2 h-[70vh] fixed top-[12%] backdrop-blur bg-background/50 transition-all`}>
+        <div className={`z-50 w-72 border-r-2 h-[90vh] fixed top-[12%] backdrop-blur bg-background/50 transition-all`}>
             <div className="flex flex-col items-center h-full p-4 relative">
                 <div className="user-data w-[60%] left-[-15px] flex flex-col items-center relative ">
                     <div className="bg-black w-[10rem] h-[10rem] rounded-full mt-2 overflow-hidden border-4 relative border-[#328cbd]">

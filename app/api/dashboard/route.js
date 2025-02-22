@@ -1,21 +1,21 @@
 import { supabase } from '@/lib/supabase';
 import { NextResponse } from 'next/server';
 
+
 export async function GET(req) {
   const url = new URL(req.url);
   
   // Handle /api/dashboard/user-blogs endpoint
   if (url.pathname === '/api/dashboard/') { {/* user-blogs */}
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      // console.log('user', user);
-      
+      const { data: { user } } = await supabase.auth.getUser(); 
+      console.log("User Data:", user); // Force log user object     
       if (!user) throw new Error('Not authenticated');
       
       const { data: blogs } = await supabase
       .from('blogs')
       .select('*')
-      .eq('author_id', user.id)
+      .eq('user_id', user.id)
       .order('created_at', { ascending: false });
       
       // console.log('blogs', blogs);
@@ -27,7 +27,6 @@ export async function GET(req) {
       );
     }
   }
-
 
   try {
     // Fetch total posts count

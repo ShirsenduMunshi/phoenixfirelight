@@ -86,6 +86,9 @@ const DashboardSidebar = () => {
                     <div className="text-xl mt-2 font-bold text-nowrap">
                         {user?.name || "User Name"}
                     </div>
+                    {/* <div className="text-xl mt-2 font-bold text-nowrap">
+                        {user?.id || "User id"}
+                    </div> */}
                     <div className="text-[1rem] text-gray-500 dark:text-gray-300 mt-1">
                         {user?.email || "user@example.com"}
                     </div>

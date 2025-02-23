@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { FaFilter } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
@@ -88,16 +88,25 @@ export default function BlogsPage() {
                     ))
                 ) : (
                     filteredBlogs.map(blog => (
-                        <Card key={blog.id} className="p-4 hover:shadow-lg transition">
-                            <img src={blog.image_url} alt={blog.title} className=''/>
-                            <CardHeader>
-                                <CardTitle>{blog.title}</CardTitle>
+                        <Card key={blog.id} className="p-4 hover:shadow-xl transition duration-300 ease-in-out">
+                            <img src={blog.image_url} alt={blog.title} className='rounded-lg'/>
+                            <CardHeader className="p-0 pt-2">
+                                <span className="text-sm font-bold text-[#3288b8]">{blog.category}</span>
                             </CardHeader>
-                            <CardContent>
-                                <p>{blog.summary}</p>
-                                <span className="text-sm">Category: {blog.category}</span>
+                                <CardTitle className="pt-2">
+                                    <h1 className='text-2xl font-bold mb-2 text-wrap'>{blog.title}</h1>
+                                </CardTitle>
+                            <CardContent className="p-0">
+                                <div className='p-4 bg-gradient-to-r from-gray-300 to-transparent dark:from-slate-800 dark:to-transparent flex gap-2 items-center mb-4'>
+                                    <div className='w-[3px] bg-slate-600 h-[40px]'></div>
+                                    <p className="text-sm">{blog.summary}</p>
+                                </div>
+                                {/* <p>{blog.summary}</p> */}
                             </CardContent>
+                            <CardFooter className="p-0 flex justify-between items-center">
+                                <p className="text-sm font-bold mt-2">{blog.created_at.slice(0,10).split("-").reverse().join("-") || NaN}</p>
                                 <Button onClick={()=>{hendaleBlog(blog.id)}} className="mt-4 font-bold">Read More</Button>
+                            </CardFooter>
                         </Card>
                     ))
                 )}

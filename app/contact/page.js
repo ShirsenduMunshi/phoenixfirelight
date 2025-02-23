@@ -1,20 +1,23 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardContent } from '@/components/ui/card';
-import { Mail, User, MessageSquare, Send } from 'lucide-react';
-import Footer from '@/components/Footer';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/hooks/use-toast";
+import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaGlobe } from "react-icons/fa";
+import { Toaster } from "@/components/ui/toaster";
+import Link from "next/link";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
-  const [status, setStatus] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,76 +25,99 @@ export default function ContactForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus('Sending...');
+    setLoading(true);
 
-    const response = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        access_key: '4dae77d3-0c57-4e92-8cc3-df618629a455',
-        ...formData,
-      }),
+    const formEndpoint = "https://api.web3forms.com/submit";
+    const accessKey = "4dae77d3-0c57-4e92-8cc3-df618629a455";
+
+    const response = await fetch(formEndpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...formData, access_key: accessKey }),
     });
 
-    const result = await response.json();
-    if (result.success) {
-      setStatus('Message sent successfully!');
-      setFormData({ name: '', email: '', message: '' });
+    setLoading(false);
+    if (response.ok) {
+      toast({ title: "Message Sent!", description: "We will get back to you soon." });
+      setFormData({ name: "", email: "", subject: "", message: "" });
     } else {
-      setStatus('Error sending message. Please try again.');
+      toast({ variant: "destructive", title: "Error!", description: "Something went wrong." });
     }
   };
 
   return (
-    <><main className="flex justify-center items-center min-h-screen p-6">
-      <Card className="w-full max-w-lg p-6 space-y-4">
-        <CardHeader className="text-center text-xl font-bold">Contact Us</CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <User className="w-5 h-5" />
-              <Input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-            </div>
+    <section className="Background-image w-full py-12 flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900">
+      <Toaster />
+        <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Contact Info Section */}
+          <Card className="shadow-lg mx-4 bg-background/50 backdrop-blur">
+            <CardContent className="p-6 space-y-6">
+              <h3 className="text-2xl font-semibold text-center">Contact Information</h3>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <FaMapMarkerAlt className="text-red-500 dark:text-blue-500" />
+                  <p>Adarpare, Jalpaiguri, west Bengal, 735101</p>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <FaPhone className="text-red-500 dark:text-blue-500" />
+                  <p><Link href="tel://8617504021" className="">+91 8617504021</Link></p>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <FaEnvelope className="text-red-500 dark:text-blue-500" />
+                  <p><Link href="mailto:shirsendumunshi@gmail.com" className="">info@phoneixFirelight.com</Link></p>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <FaGlobe className="text-red-500 dark:text-blue-500" />
+                  <p><Link href="https://shirsendu4.netlify.app/" className="">My Portfolio</Link></p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
-            <div className="flex items-center space-x-2">
-              <Mail className="w-5 h-5" />
-              <Input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div className="flex items-start space-x-2">
-              <MessageSquare className="w-5 h-5 mt-2" />
-              <Textarea
-                name="message"
-                placeholder="Your Message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <Button type="submit" className="w-full flex items-center justify-center space-x-2">
-              <Send className="w-4 h-4" />
-              <span>Send Message</span>
-            </Button>
-          </form>
-          {status && <p className="text-center mt-2 text-sm">{status}</p>}
-        </CardContent>
-      </Card>
-    </main>
-    {/* <Footer /> */}
-    </>);
+          {/* Contact Form Section */}
+          <Card className="shadow-lg mx-4 bg-background/50 backdrop-blur">
+            <CardContent className="p-6">
+              <h2 className="text-3xl font-semibold text-center mb-6">Get in Touch</h2>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <Input
+                  type="text"
+                  name="name"
+                  placeholder="Your Name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder="Your Email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+                <Input
+                  type="text"
+                  name="subject"
+                  placeholder="Subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                />
+                <Textarea
+                  name="message"
+                  placeholder="Your Message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                />
+                <Button type="submit" className="w-full" disabled={loading}>
+                  {loading ? "Sending..." : "Send Message"}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+      </div>
+    </section>
+  );
 }

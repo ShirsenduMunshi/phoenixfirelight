@@ -238,6 +238,7 @@ import { ModeToggle } from "./theme-btn";
 import { signOut } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
 import { Card } from "./ui/card";
+import Image from "next/image";
 
 export default function Navbar() {
   const pathName = usePathname();
@@ -283,7 +284,7 @@ export default function Navbar() {
           {/* Brand Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="text-xl font-bold flex flex-col items-center justify-center">
-              <img src="/logo1-bg-less.png" alt="logo" className="w-[80px] bg-transparent" />
+              <Image src="/logo1-bg-less.png" alt="logo" width={80} height={80} className="w-[80px] bg-transparent" priority/>
               <p>
                 <span className="text-[#338fc1] font1">P</span>hoenix Fireligh
                 <span className="text-[#338fc1] font1">t</span>
@@ -335,10 +336,14 @@ export default function Navbar() {
         } transition-transform duration-300 ease-in-out md:hidden`}
       >
         <Card className="flex flex-col space-y-4 p-6 ">
-          {/* Close Button */}
-          <button onClick={() => setMenuOpen(false)} className="self-end">
-            <X className="h-6 w-6" />
-          </button>
+          <div className="flex justify-between items-center">
+            {/* Brand Logo */}
+            <Image src="/logo1-bg-less.png" alt="logo" width={80} height={80} priority/>
+            {/* Close Button */}
+            <button onClick={() => setMenuOpen(false)} className="self-end">
+              <X className="h-6 w-6" />
+            </button>
+          </div>
 
           <NavLinks onClick={() => setMenuOpen(false)} />
 

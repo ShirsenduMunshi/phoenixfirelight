@@ -104,7 +104,10 @@ export default function BlogsPage() {
                                 {/* <p>{blog.summary}</p> */}
                             </CardContent>
                             <CardFooter className="p-0 flex justify-between items-center">
-                                <p className="text-sm font-bold mt-2">{blog.created_at.slice(0,10).split("-").reverse().join("-") || NaN}</p>
+                                <div>
+                                    <p>Published on :</p>
+                                    <p className="text-sm font-bold">{blog.created_at.slice(0,10).split("-").reverse().join("-") || NaN}</p>
+                                </div>
                                 <Button onClick={()=>{hendaleBlog(blog.id)}} className="mt-4 font-bold">Read More</Button>
                             </CardFooter>
                         </Card>

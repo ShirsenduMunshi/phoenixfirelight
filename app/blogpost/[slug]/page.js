@@ -95,9 +95,9 @@ export default function BlogPost() {
             </div>
             <Card className="mt-6 text-lg leading-relaxed">
                 <CardContent>
-                    <p className='mt-4 text-xl'>
+                    <pre className='mt-4 text-xl text-wrap'>
                         {blog.body}
-                    </p>
+                    </pre>
                 </CardContent>
             </Card>
         </div>

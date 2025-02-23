@@ -88,8 +88,10 @@ export default function BlogsPage() {
                     ))
                 ) : (
                     filteredBlogs.map(blog => (
-                        <Card key={blog.id} className="p-4 hover:shadow-xl transition duration-300 ease-in-out">
-                            <img src={blog.image_url} alt={blog.title} className='rounded-lg'/>
+                        <Card key={blog.id} className="p-4 hover:shadow-xl transition duration-300 ease-in-out relative">
+                            <div className='bg-gradient-to-t z-10 from-gray-300 to-transparent dark:from-slate-800 dark:to-transparent rounded-lg overflow-hidden'>
+                                <img src={blog.image_url} alt={blog.title} className='rounded-lg'/>
+                            </div>
                             <CardHeader className="p-0 pt-2">
                                 <span className="text-sm font-bold text-[#3288b8]">{blog.category}</span>
                             </CardHeader>

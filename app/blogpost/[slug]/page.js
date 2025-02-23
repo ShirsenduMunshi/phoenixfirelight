@@ -2,13 +2,12 @@
 
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { Share } from 'lucide-react';
 import Image from 'next/image';
 import { FaFacebook, FaLinkedin, FaTwitter } from 'react-icons/fa';
-// import { createClient } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
 
 export default function BlogPost() {
@@ -16,11 +15,6 @@ export default function BlogPost() {
     const [blog, setBlog] = useState(null);
     const [loading, setLoading] = useState(true);
     const [author, setAuthor] = useState("");
-
-    // const supabase = createClient(
-    //     process.env.NEXT_PUBLIC_SUPABASE_URL,
-    //     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    //   );
 
       const getUserName = async (id) => {
         try {
@@ -85,11 +79,14 @@ export default function BlogPost() {
     return (
         <div className="container mx-auto py-8 px-4 w-[90%]">
             <h1 className="text-4xl font-bold mb-2">{blog.title}</h1>
-            <p className=" mb-4">{blog.summary}</p>
+            <div className='p-4 bg-gradient-to-r from-gray-300 to-transparent dark:from-slate-800 dark:to-transparent flex gap-4 items-center mb-4'>
+                <div className='ml-4 w-[3px] bg-slate-600 h-[40px]'></div>
+                <p className="ml-4 text-2xl">{blog.summary}</p>
+            </div>
             <div className='relative'>
-            <div className=" flex small-dev gap-80 mb-6 absolute bottom-4 px-4 w-full">
-                <span className="">Written by:<br/> <strong className='py-4'>{author || 'Unknown'}</strong></span>
-                <span className="">Published on: <p className='py-4'>{blog.created_at.slice(0,10).split("-").reverse().join("-") || 'N/A'}</p></span>
+            <div className=" flex small-dev gap-72 mb-6 absolute bottom-4 px-4 w-full">
+                <span className="bg-gradient-to-r from-white to-transparent dark:from-black dark:to-transparent p-3 rounded-lg">Written by:<br/> <strong className=''>{author || 'Unknown'}</strong></span>
+                <span className="bg-gradient-to-r from-white to-transparent dark:from-black dark:to-transparent p-3 rounded-lg">Published on: <p className='font-bold'>{blog.created_at.slice(0,10).split("-").reverse().join("-") || 'N/A'}</p></span>
             </div>
                 <Image src={blog.image_url} alt={blog.title} width={800} height={400} className="rounded-lg w-full h-[70vh] object-cover" priority/>
 
@@ -100,9 +97,13 @@ export default function BlogPost() {
                     <Button variant="outline" size="icon"><Share size={18} /></Button>
                 </div>
             </div>
-            <div className="mt-6 text-lg leading-relaxed">
-                {blog.body}
-            </div>
+            <Card className="mt-6 text-lg leading-relaxed">
+                <CardContent>
+                    <p className='mt-4 text-xl'>
+                        {blog.body}
+                    </p>
+                </CardContent>
+            </Card>
         </div>
     );
 }

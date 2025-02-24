@@ -108,36 +108,6 @@ const AdminPosts = () => {
   };
 
   return (
-    // <div className="container mx-auto p-4">
-    //   <h1 className="text-2xl font-bold mb-4">Manage Blog Posts</h1>
-
-    //   {loading && <p>Loading...</p>}
-    //   {error && <p className="text-red-500">{error}</p>}
-
-    //   {!loading && blogs.length === 0 && <p>No blogs found.</p>}
-
-    //   <div className="grid gap-4">
-    //     {blogs.map((blog, index) => (
-    //       <div
-    //         key={blog.id || index}
-    //         className="p-4 border rounded-md shadow-md"
-    //       >
-    //         <h2 className="text-xl font-semibold">{blog.title}</h2>
-    //         <p className="text-sm ">{blog.category}</p>
-    //         <p>{blog.summary}</p>
-
-    //         <Button
-    //           className="mt-2 px-4 py-2 rounded"
-    //           onClick={() => setSelectedBlog(blog)}
-    //         >
-    //           Edit
-    //         </Button>
-    //         <Button variant="destructive" onClick={() => handleDelete(blog.id)}>
-    //           Delete
-    //         </Button>
-    //       </div>
-    //     ))}
-    //   </div>
     <div className="container mx-auto px-4 md:px-8 lg:px-10 py-4 md:py-8 lg:py-12">
   <div className="mb-8 md:mb-10 lg:mb-12">
     <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100">
@@ -174,7 +144,7 @@ const AdminPosts = () => {
                     <img src={blog.image_url} alt={blog.title} className="w-full h-full object-cover" />
                 </div>
             )}
-            
+
           <div className="p-5">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
               {blog.title}

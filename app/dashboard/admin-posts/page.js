@@ -7,6 +7,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import StarterKit from "@tiptap/starter-kit";
+import { EditorContent, useEditor } from "@tiptap/react";
+
 
 const AdminPosts = () => {
   const [blogs, setBlogs] = useState([]);
@@ -200,10 +203,12 @@ const EditBlogModal = ({ blog, onClose, onUpdate }) => {
   const [error, setError] = useState("");
   const [isBodyChanged, setIsBodyChanged] = useState(false); // Track changes
 
+  
   // Detect changes in body
   useEffect(() => {
     setIsBodyChanged(body !== blog?.body);
   }, [body]);
+
 
   // Handle image selection
   const handleImageChange = (e) => {
@@ -213,6 +218,15 @@ const EditBlogModal = ({ blog, onClose, onUpdate }) => {
       setImageUrl(URL.createObjectURL(file)); // Preview new image
     }
   };
+
+    // Initialize TipTap Editor
+    const editor = useEditor({
+        extensions: [StarterKit],
+        content: blog?.body || "", 
+        onUpdate: ({ editor }) => {
+          setIsBodyChanged(true);
+        },
+      });
 
   const handleUpdate = async () => {
     setLoading(true);
@@ -261,6 +275,7 @@ const EditBlogModal = ({ blog, onClose, onUpdate }) => {
         category,
         summary,
         image_url: updatedImageUrl,
+        body: editor.getHTML(), // Get HTML content from TipTap editor
       };
 
       if (isBodyChanged) {
@@ -286,7 +301,7 @@ const EditBlogModal = ({ blog, onClose, onUpdate }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <Card className="max-w-md w-full rounded-xl shadow-lg overflow-hidden">
+      <Card className="max-w-md w-full rounded-xl shadow-lg max-h-96 overflow-y-scroll">
         <CardHeader>
           <CardTitle className="text-2xl font-bold">Edit Blog Post</CardTitle>
           <CardDescription>Make changes to your blog content here.</CardDescription>
@@ -349,14 +364,15 @@ const EditBlogModal = ({ blog, onClose, onUpdate }) => {
 
           <div className="grid gap-2">
             <Label htmlFor="body">Content</Label>
-            <Textarea
+            {/* <Textarea
               id="body"
               value={body}
               onChange={(e) => setBody(e.target.value)}
               placeholder="Blog content"
               className="resize-none"
               rows={5}
-            />
+            /> */}
+            <EditorContent editor={editor} className="border-none outline-none tiptap p-4"/>
           </div>
         </CardContent>
         <CardFooter className="flex justify-end gap-2">

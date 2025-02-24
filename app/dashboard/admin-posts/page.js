@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 const AdminPosts = () => {
   const [blogs, setBlogs] = useState([]);
@@ -285,62 +285,86 @@ const EditBlogModal = ({ blog, onClose, onUpdate }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center">
-      <Card className="p-6 rounded-lg shadow-lg w-96 h-[600px] overflow-y-scroll">
-        <h2 className="text-xl font-bold mb-4">Edit Blog</h2>
-        {error && <p className="text-red-500">{error}</p>}
+    <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+      <Card className="max-w-md w-full rounded-xl shadow-lg overflow-hidden">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold">Edit Blog Post</CardTitle>
+          <CardDescription>Make changes to your blog content here.</CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          {error && <p className="text-red-500 p-2 rounded-md bg-red-100">{error}</p>}
 
-        {/* Image Preview */}
-        {imageUrl && (
-          <img
-            src={imageUrl}
-            alt="Blog Preview"
-            className="w-full h-32 object-cover rounded-md mb-2"
-          />
-        )}
+          {/* Image Preview */}
+          {imageUrl && (
+            <div className="rounded-md overflow-hidden">
+              <img
+                src={imageUrl}
+                alt="Blog Preview"
+                className="w-full h-40 object-cover"
+              />
+            </div>
+          )}
 
-        <Label htmlFor="image">Upload New Image (Optional)</Label>
-        <Input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          className="mb-2"
-        />
+          <div className="grid gap-2">
+            <Label htmlFor="image">Upload New Image (Optional)</Label>
+            <Input
+              id="image"
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+          </div>
 
-        <Label htmlFor="title">Title</Label>
-        <Input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="w-full mb-2"
-        />
+          <div className="grid gap-2">
+            <Label htmlFor="title">Title</Label>
+            <Input
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Blog title"
+            />
+          </div>
 
-        <Label htmlFor="category">Category</Label>
-        <Input
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="w-full mb-2"
-        />
+          <div className="grid gap-2">
+            <Label htmlFor="category">Category</Label>
+            <Input
+              id="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              placeholder="Category"
+            />
+          </div>
 
-        <Label htmlFor="summary">Summary</Label>
-        <Textarea
-          value={summary}
-          onChange={(e) => setSummary(e.target.value)}
-          className="w-full mb-2"
-        ></Textarea>
+          <div className="grid gap-2">
+            <Label htmlFor="summary">Summary</Label>
+            <Textarea
+              id="summary"
+              value={summary}
+              onChange={(e) => setSummary(e.target.value)}
+              placeholder="Short summary of the blog"
+              className="resize-none"
+              rows={3}
+            />
+          </div>
 
-        <Label htmlFor="body">Content</Label>
-        <Textarea
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-          className="w-full mb-2"
-        ></Textarea>
-
-        <div className="flex justify-end space-x-2">
-          <Button onClick={onClose}>Cancel</Button>
+          <div className="grid gap-2">
+            <Label htmlFor="body">Content</Label>
+            <Textarea
+              id="body"
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              placeholder="Blog content"
+              className="resize-none"
+              rows={5}
+            />
+          </div>
+        </CardContent>
+        <CardFooter className="flex justify-end gap-2">
+          <Button variant="ghost" onClick={onClose}>Cancel</Button>
           <Button onClick={handleUpdate} disabled={loading}>
             {loading ? "Updating..." : "Update"}
           </Button>
-        </div>
+        </CardFooter>
       </Card>
     </div>
   );

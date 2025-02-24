@@ -109,9 +109,60 @@ export async function DELETE(req) {
   }
 }
 
+// export async function PATCH(req) {
+//   try {
+//     const { id, title, summary, image_url } = await req.json(); // Get updated fields
+
+//     if (!id) {
+//       return NextResponse.json({ error: "Blog ID is required" }, { status: 400 });
+//     }
+
+//     // Fetch the existing blog to get the old image URL
+//     const { data: blog, error: fetchError } = await supabase
+//       .from("blogs")
+//       .select("image_url")
+//       .eq("id", id)
+//       .single();
+
+//     if (fetchError || !blog) {
+//       return NextResponse.json({ error: "Blog not found!" }, { status: 400 });
+//     }
+
+//     const oldImageUrl = blog.image_url;
+
+//     // Delete old image if it exists and a new image is provided
+//     if (oldImageUrl && image_url !== oldImageUrl) {
+//       const oldImageName = oldImageUrl.split("/").pop(); // Extract old image filename
+
+//       const { error: deleteError } = await supabase
+//         .storage
+//         .from("blog-images") // Ensure this matches your bucket name
+//         .remove([oldImageName]);
+
+//       if (deleteError) {
+//         console.error("Old image delete error:", deleteError);
+//       }
+//     }
+
+//     // Update the blog with new data
+//     const { error } = await supabase
+//       .from("blogs")
+//       .update({ title, summary, image_url })
+//       .eq("id", id);
+
+//     if (error) {
+//       throw error;
+//     }
+
+//     return NextResponse.json({ message: "Blog updated successfully" }, { status: 200 });
+//   } catch (error) {
+//     return NextResponse.json({ error: error.message }, { status: 500 });
+//   }
+// }
+
 export async function PATCH(req) {
   try {
-    const { id, title, summary, image_url } = await req.json(); // Get updated fields
+    const { id, title, category, summary, body, image_url } = await req.json(); // Get updated fields
 
     if (!id) {
       return NextResponse.json({ error: "Blog ID is required" }, { status: 400 });
@@ -130,7 +181,17 @@ export async function PATCH(req) {
 
     const oldImageUrl = blog.image_url;
 
-    // Delete old image if it exists and a new image is provided
+    // Update the blog with new data first
+    const { error: updateError } = await supabase
+      .from("blogs")
+      .update({ title, category, summary, body, image_url })
+      .eq("id", id);
+
+    if (updateError) {
+      throw updateError;
+    }
+
+    // Only delete the old image if it's different from the new one
     if (oldImageUrl && image_url !== oldImageUrl) {
       const oldImageName = oldImageUrl.split("/").pop(); // Extract old image filename
 
@@ -142,16 +203,6 @@ export async function PATCH(req) {
       if (deleteError) {
         console.error("Old image delete error:", deleteError);
       }
-    }
-
-    // Update the blog with new data
-    const { error } = await supabase
-      .from("blogs")
-      .update({ title, summary, image_url })
-      .eq("id", id);
-
-    if (error) {
-      throw error;
     }
 
     return NextResponse.json({ message: "Blog updated successfully" }, { status: 200 });

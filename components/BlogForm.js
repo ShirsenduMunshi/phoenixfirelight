@@ -10,13 +10,14 @@ import { supabase } from '@/lib/supabase';
 import { Toaster } from './ui/toaster';
 import DashboardSidebar from './DashboardSidebar';
 import ProtectedRoute from "@/components/ProtectedRoute";
+import TipTapEditor from './TipTapEditor';
 
 function BlogForm() {
     const { toast } = useToast();
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('');
     const [summary, setSummary] = useState('');
-    const [body, setBody] = useState('');
+    const [body, setBody] = useState("");
     const [image, setImage] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -128,14 +129,15 @@ function BlogForm() {
 
                     <div className="space-y-2">
                         <Label htmlFor="body">Content</Label>
-                        <Textarea
+                        {/* <Textarea
                             id="body"
                             value={body}
                             onChange={(e) => setBody(e.target.value)}
                             placeholder="Enter blog content"
                             className="min-h-[200px]"
                             required
-                        />
+                        /> */}
+                        <TipTapEditor content={body} setContent={setBody} /> {/* Replaced Textarea */}
                     </div>
 
                     <div className="space-y-2">

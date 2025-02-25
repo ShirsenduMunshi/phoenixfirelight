@@ -21,6 +21,7 @@ function BlogForm() {
     const [image, setImage] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [formResetKey, setFormResetKey] = useState(0); // Reset form after submission
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -69,6 +70,7 @@ function BlogForm() {
                 setSummary('');
                 setBody('');
                 setImage(null);
+                setFormResetKey(prevKey => prevKey + 1);
             };
         } catch (error) {
             toast({
@@ -129,15 +131,8 @@ function BlogForm() {
 
                     <div className="space-y-2">
                         <Label htmlFor="body">Content</Label>
-                        {/* <Textarea
-                            id="body"
-                            value={body}
-                            onChange={(e) => setBody(e.target.value)}
-                            placeholder="Enter blog content"
-                            className="min-h-[200px]"
-                            required
-                        /> */}
-                        <TipTapEditor content={body} setContent={setBody} /> {/* Replaced Textarea */}
+                        <TipTapEditor content={body} setContent={setBody} className=
+                        "" /> {/* Replaced Textarea */}
                     </div>
 
                     <div className="space-y-2">

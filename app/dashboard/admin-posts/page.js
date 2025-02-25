@@ -27,10 +27,10 @@ const AdminPosts = () => {
       setUser(profile);
       setUserId(profile.id);
       // console.log("Fetched user profile:", profile); // Log the fetched user profile
-      console.log("User ID:", profile.id); // Log the fetched user profile
+    //   console.log("User ID:", profile.id); // Log the fetched user profile
     } catch (err) {
       setError(err.message);
-      console.error("Error fetching user profile:", err);
+    //   console.error("Error fetching user profile:", err);
     } finally {
       // setLoading(false);
     }
@@ -364,14 +364,6 @@ const EditBlogModal = ({ blog, onClose, onUpdate }) => {
 
           <div className="grid gap-2">
             <Label htmlFor="body">Content</Label>
-            {/* <Textarea
-              id="body"
-              value={body}
-              onChange={(e) => setBody(e.target.value)}
-              placeholder="Blog content"
-              className="resize-none"
-              rows={5}
-            /> */}
             <EditorContent editor={editor} className="border-none outline-none tiptap p-4"/>
           </div>
         </CardContent>

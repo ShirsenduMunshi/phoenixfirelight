@@ -18,7 +18,7 @@ export default function BlogsPage() {
         try {
             const response = await fetch('/api/dashboard');
             const data = await response.json();
-            console.log('Blogs data:', data);
+            // console.log('Blogs data:', data);
             setBlogs(data.recentPosts);
             setCategories(['All', ...new Set(data.recentPosts.map(recentPosts => recentPosts.category))]);
             setLoading(false);
@@ -29,18 +29,6 @@ export default function BlogsPage() {
 
     useEffect(() => {
         fetchBlogs();
-        // Simulate fetching data
-
-        // setTimeout(() => {
-        //     const fetchedBlogs = [
-        //         { id: 1, title: 'Blog 1', category: 'Tech', summary: 'This is a tech blog' },
-        //         { id: 2, title: 'Blog 2', category: 'Lifestyle', summary: 'This is a lifestyle blog' },
-        //         { id: 3, title: 'Blog 3', category: 'Tech', summary: 'Another tech blog' },
-        //     ];
-        //     setBlogs(fetchedBlogs);
-        //     setCategories(['All', ...new Set(fetchedBlogs.map(blog => blog.category))]);
-        //     setLoading(false);
-        // }, 2000);
     }, []);
 
     const hendaleBlog = (id) => {

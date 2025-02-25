@@ -134,7 +134,7 @@ function DashboardPageContent() {
 
                 {/* Middle Section - Recent Posts Table */}
                 <div className="bg-card rounded-lg shadow-md p-4">
-                    <h2 className="text-lg font-semibold mb-4">Recent Posts by current logged in user</h2>
+                    <h2 className="text-lg font-semibold mb-4">Your recent Posts</h2>
                     <Table>
                         <TableHeader>
                             <TableRow>

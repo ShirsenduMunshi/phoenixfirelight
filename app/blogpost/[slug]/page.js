@@ -96,7 +96,7 @@ export default function BlogPost() {
             <Card className="mt-6 text-lg leading-relaxed">
                 <CardContent>
                     {/* <pre className='mt-4 text-xl text-wrap'> */}
-                        <div dangerouslySetInnerHTML={{ __html: blog.body }} className="prose max-w-none" />
+                        <div dangerouslySetInnerHTML={{ __html: blog.body }} className="prose p-4 bg-white rounded-b-lg backdrop-blur max-w-none" />
                         {/* {blog.body} */}
                     {/* </pre> */}
                 </CardContent>

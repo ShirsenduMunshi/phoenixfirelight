@@ -8,6 +8,35 @@ export default {
   ],
   theme: {
   	extend: {
+		typography: ({ theme }) => ({
+			DEFAULT: { // Default Prose styles (light mode)
+			  css: {
+				// ... you can customize default styles here if needed
+			  },
+			},
+			// Dark mode Prose styles
+			dark: {
+			  css: {
+				color: theme('colors.gray.300'), // Example: Light gray text color for paragraphs
+				'--tw-prose-body': theme('colors.gray.300'), // Important for general text
+				'--tw-prose-headings': theme('colors.gray.100'), // Example: Lighter color for headings
+				'--tw-prose-lead': theme('colors.gray.400'),
+				'--tw-prose-links': theme('colors.sky.500'),
+				'--tw-prose-bold': theme('colors.gray.100'), // Example: Lighter color for bold text
+				'--tw-prose-counters': theme('colors.gray.400'),
+				'--tw-prose-bullets': theme('colors.gray.600'),
+				'--tw-prose-hr': theme('colors.gray.700'),
+				'--tw-prose-quotes': theme('colors.gray.200'),
+				'--tw-prose-quote-borders': theme('colors.gray.500'),
+				'--tw-prose-captions': theme('colors.gray.400'),
+				'--tw-prose-code': theme('colors.gray.200'),
+				'--tw-prose-pre-code': theme('colors.gray.100'),
+				'--tw-prose-pre-bg': theme('colors.gray.900'),
+				'--tw-prose-th-borders': theme('colors.gray.600'),
+				'--tw-prose-td-borders': theme('colors.gray.700'),
+			  },
+			},
+		  }),
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

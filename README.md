@@ -23,7 +23,7 @@ Welcome to the **Next.js Blog App** – a dynamic and feature-rich blogging plat
 
 ## 📸 Screenshots
 
-![Blog Dashboard](https://via.placeholder.com/1200x600?text=Blog+Dashboard+Screenshot)
+![Blog Dashboard](public/app-screan.png)
 
 ## ⚙️ Installation & Setup
 
